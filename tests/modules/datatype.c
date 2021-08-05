@@ -99,7 +99,7 @@ static int datatype_restore(RedisModuleCtx *ctx, RedisModuleString **argv, int a
         return REDISMODULE_OK;
     }
 
-    DataType *dt = RedisModule_LoadDataTypeFromString(argv[2], datatype);
+    DataType *dt = RedisModule_LoadDataTypeFromString(argv[2], datatype, 0);
     if (!dt) {
         RedisModule_ReplyWithError(ctx, "Invalid data");
         return REDISMODULE_OK;
