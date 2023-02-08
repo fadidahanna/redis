@@ -178,7 +178,7 @@ if __name__ == '__main__':
                 command_counter[req.command] = command_counter.get(req.command, 0) + 1
 
                 try:
-                    jsonschema.validate(instance=res.json, schema=req.schema)
+                    jsonschema.validate(instance=res.json, schema=req.schema, cls=jsonschema.validators.Draft201909Validator)
                 except jsonschema.ValidationError as err:
                     print(f"JSON schema validation error on {filename}: {err}")
                     print(f"argv: {req.argv}")
