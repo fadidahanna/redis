@@ -205,6 +205,8 @@ size_t reqresAppendResponse(client *c) {
     if (listLength(c->reply)) {
         curr_index = listLength(c->reply) - 1;
         curr_used = ((clientReplyBlock *)listNodeValue(listLast(c->reply)))->used;
+    } else {
+        goto release_buf;
     }
 
     /* Now, append reply bytes from the reply list */
@@ -255,6 +257,7 @@ size_t reqresAppendResponse(client *c) {
     fflush(fp);
     fclose(fp);
 
+release_buf:
     zfree(c->reqres.buf);
     c->reqres.buf = NULL;
     c->reqres.used = c->reqres.capacity = 0;

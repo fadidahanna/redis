@@ -1537,6 +1537,8 @@ void clearClientConnectionState(client *c) {
 void freeClient(client *c) {
     listNode *ln;
 
+    reqresAppendResponse(c);
+
     /* If a client is protected, yet we need to free it right now, make sure
      * to at least use asynchronous freeing. */
     if (c->flags & CLIENT_PROTECTED) {
